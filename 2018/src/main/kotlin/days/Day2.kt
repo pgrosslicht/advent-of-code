@@ -1,6 +1,7 @@
 package days
 
 import Day
+import java.lang.IllegalArgumentException
 
 class Day2 : Day(2) {
     override fun partOne(): Any = inputList
@@ -22,7 +23,17 @@ class Day2 : Day(2) {
             )
         }
 
-    override fun partTwo(): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun partTwo(): Any = findSimilarStrings(inputList)
+
+    private fun findSimilarStrings(input: List<String>): String {
+        for (x in input) {
+            for (y in input.drop(1)) {
+                val differentLetters = x.zip(y).filterNot { it.first == it.second }
+                if (differentLetters.size == 1) {
+                    return x.filter { it != differentLetters.first().first }
+                }
+            }
+        }
+        throw IllegalArgumentException("No two IDs are exactly one character different")
     }
 }
