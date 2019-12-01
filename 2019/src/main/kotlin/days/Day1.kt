@@ -24,9 +24,8 @@ class Day1 : Day(1) {
     The Fuel Counter-Upper needs to know the total fuel requirement. To find it, individually calculate the fuel needed for the mass of each module (your puzzle input), then add together all the fuel values.
 
     What is the sum of the fuel requirements for all of the modules on your spacecraft?*/
-    override fun partOne(): Any = dataList.map(String::toInt)
-        .map { floor(it.div(3.0)).minus(2) }
-        .sum()
+    override fun partOne(): Int = dataList.map(String::toInt)
+        .sumBy { it / 3 - 2 }
 
     /*--- Part Two ---
     During the second Go / No Go poll, the Elf in charge of the Rocket Equation Double-Checker stops the launch sequence. Apparently, you forgot to include additional fuel for the fuel you just added.
@@ -40,13 +39,13 @@ class Day1 : Day(1) {
     The fuel required by a module of mass 100756 and its fuel is: 33583 + 11192 + 3728 + 1240 + 411 + 135 + 43 + 12 + 2 = 50346.
     What is the sum of the fuel requirements for all of the modules on your spacecraft when also taking into account the mass of the added fuel? (Calculate the fuel requirements for each module separately, then add them all up at the end.)*/
 
-    override fun partTwo(): Any = dataList.map(String::toInt)
-        .map { floor(it.div(3.0)).minus(2) }
+    override fun partTwo(): Int = dataList.map(String::toInt)
+        .map { it / 3 - 2 }
         .flatMap { makeSequence(it).asIterable() }
         .sum()
 
-    private fun makeSequence(value: Double): Sequence<Double> =
-        generateSequence(value) { floor(it.div(3.0)).minus(2) }.takeWhile { it > 0 }
+    private fun makeSequence(value: Int): Sequence<Int> =
+        generateSequence(value) { it / 3 - 2 }.takeWhile { it > 0 }
 }
 
 fun main() = Day.mainify(Day1::class)

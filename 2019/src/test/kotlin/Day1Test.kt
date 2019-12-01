@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 class Day1Test {
     @Test
     fun testPart1() {
-        assertEquals(3154112.0, Day1().partOne())
+        assertEquals(3154112, Day1().partOne())
     }
 
     @Test
     fun testPart2() {
-        assertEquals(4728317.0, Day1().partTwo())
+        assertEquals(4728317, Day1().partTwo())
     }
 }
