@@ -1,10 +1,34 @@
-abstract class Day(dayNumber: Int) {
+import kotlin.reflect.KClass
+import kotlin.reflect.full.primaryConstructor
+import kotlin.system.measureTimeMillis
 
-    // lazy delegate ensures the property gets computed only on first access
-    protected val inputList: List<String> by lazy { InputReader.getInputAsList(dayNumber) }
-    protected val inputString: String by lazy { InputReader.getInputAsString(dayNumber) }
+abstract class Day(val day: Int) {
+    protected val dataList: List<String> by lazy { InputReader.getInputAsList(day) }
+    protected val dataString: String by lazy { InputReader.getInputAsString(day) }
 
-    abstract fun partOne(): Any
+    open fun partOne(): Any? {
+        return null
+    }
 
-    abstract fun partTwo(): Any
+    open fun partTwo(): Any? {
+        return null
+    }
+
+    companion object {
+        fun mainify(clazz: KClass<out Day>) {
+            clazz.primaryConstructor?.call()?.apply {
+                println("Day $day")
+                measureTimeMillis {
+                    println("First: ${partOne()?.toString() ?: "unsolved"}")
+                }.run {
+                    println("Time: ${this}ms")
+                }
+                measureTimeMillis {
+                    println("Second: ${partTwo()?.toString() ?: "unsolved"}")
+                }.run {
+                    println("Time: ${this}ms")
+                }
+            }
+        }
+    }
 }

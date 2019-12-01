@@ -4,7 +4,7 @@ import Day
 import java.lang.IllegalArgumentException
 
 class Day2 : Day(2) {
-    override fun partOne(): Any = inputList
+    override fun partOne(): Any = dataList
         .map(this::calculateChecksumParts)
         .fold(Pair(0, 0)) { sum, value ->
             Pair(sum.first + value.first, sum.second + value.second)
@@ -23,7 +23,7 @@ class Day2 : Day(2) {
             )
         }
 
-    override fun partTwo(): Any = findSimilarStrings(inputList)
+    override fun partTwo(): Any = findSimilarStrings(dataList)
 
     private fun findSimilarStrings(input: List<String>): String {
         for (x in input) {
@@ -37,3 +37,5 @@ class Day2 : Day(2) {
         throw IllegalArgumentException("No two IDs are exactly one character different")
     }
 }
+
+fun main() = Day.mainify(Day2::class)

@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-    compile(kotlin("stdlib"))
-    compile("org.reflections", "reflections", "0.9.11")
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
 }

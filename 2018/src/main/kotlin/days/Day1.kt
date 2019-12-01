@@ -1,7 +1,7 @@
 package days
 
 import Day
-import asInfiniteSequence
+import utils.asInfiniteSequence
 import java.lang.IllegalArgumentException
 
 class Day1: Day(1) {
@@ -32,7 +32,7 @@ class Day1: Day(1) {
     //-1, -2, -3 results in -6
     //Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?
 
-    override fun partOne(): Any = inputList.map(String::toInt)
+    override fun partOne(): Any = dataList.map(String::toInt)
         .reduce(Integer::sum)
 
     //    --- Part Two ---
@@ -57,7 +57,7 @@ class Day1: Day(1) {
     //+7, +7, -2, -7, -4 first reaches 14 twice.
     //What is the first frequency your device reaches twice?
 
-    override fun partTwo(): Any = solve2(inputList.map(String::toInt))
+    override fun partTwo(): Any = solve2(dataList.map(String::toInt))
 
     private fun solve2(input: List<Int>): Int {
         val set = mutableSetOf<Int>()
@@ -72,3 +72,4 @@ class Day1: Day(1) {
     }
 }
 
+fun main() = Day.mainify(Day1::class)

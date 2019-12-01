@@ -4,7 +4,7 @@ import Day
 
 class Day3 : Day(3) {
     private val claims: List<Claim> by lazy {
-        inputList.map { Claim.parse(it) }
+        dataList.map { Claim.parse(it) }
     }
 
     override fun partOne(): Any = claims
@@ -49,3 +49,5 @@ class Day3 : Day(3) {
         }
     }
 }
+
+fun main() = Day.mainify(Day3::class)
