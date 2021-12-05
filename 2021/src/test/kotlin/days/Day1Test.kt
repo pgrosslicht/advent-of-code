@@ -1,15 +1,16 @@
-import days.Day2
+package days
+
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day2Test {
+class Day1Test {
     @Test
     fun testPart1() {
-        assertEquals(2215080, Day2().partOne())
+        assertEquals(1446, Day1().partOne())
     }
 
     @Test
     fun testPart2() {
-        assertEquals(1864715580, Day2().partTwo())
+        assertEquals(1486, Day1().partTwo())
     }
 }
