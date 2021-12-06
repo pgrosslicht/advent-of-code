@@ -50,20 +50,20 @@ fun generateTests(today: LocalDate) {
                 .addFunction(
                     FunSpec.builder("testPart1")
                         .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
-                        .addCode("assertEquals(0, Day${day}().partOne()")
+                        .addCode("assertEquals(0, Day$day().partOne())")
                         .build()
                 )
                 .addFunction(
                     FunSpec.builder("testPart2")
                         .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
-                        .addCode("assertEquals(0, Day${day}().partTwo()")
+                        .addCode("assertEquals(0, Day$day().partTwo())")
                         .build()
                 )
                 .build()
         )
         .build()
 
-    file.writeTo(Paths.get("${today.year}/test/main/kotlin").toAbsolutePath())
+    file.writeTo(Paths.get("${today.year}/src/test/main/kotlin").toAbsolutePath())
 }
 
 fun downloadInput(today: LocalDate) {
