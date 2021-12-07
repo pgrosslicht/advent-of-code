@@ -63,7 +63,7 @@ fun generateTests(today: LocalDate) {
         )
         .build()
 
-    file.writeTo(Paths.get("${today.year}/src/test/main/kotlin").toAbsolutePath())
+    file.writeTo(Paths.get("${today.year}/src/test/kotlin").toAbsolutePath())
 }
 
 fun downloadInput(today: LocalDate) {

@@ -11,6 +11,6 @@ class Day6Test {
 
     @Test
     fun testPart2() {
-        assertEquals(0, Day6().partTwo())
+        assertEquals(1650309278600, Day6().partTwo())
     }
 }
