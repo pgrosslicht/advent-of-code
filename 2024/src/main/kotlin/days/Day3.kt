@@ -8,22 +8,18 @@ public class Day3 : Day(3) {
         a * b
     }
 
-    override fun partTwo(): Any? {
-        val matches = Regex("((do\\(\\)|don't\\(\\))|mul\\(\\d{1,3},\\d{1,3}\\))").findAll(dataString)
-        var enabled = true
-        var sum = 0
-        for (match in matches) {
-            if (match.value.equals("do()")) {
-                enabled = true
-            } else if (match.value.equals("don't()")) {
-                enabled = false
-            } else if (enabled) {
-                val (a, b) = match.value.drop(4).dropLast(1).split(",").map { it.toInt() }
-                sum += a * b
+    override fun partTwo(): Int = Regex("((do\\(\\)|don't\\(\\))|mul\\(\\d{1,3},\\d{1,3}\\))")
+        .findAll(dataString)
+        .fold(Pair(true, 0)) { acc, match ->
+            when (match.value) {
+                "do()" -> acc.copy(first = true)
+                "don't()" -> acc.copy(first = false)
+                else -> if (acc.first) {
+                    val (a, b) = match.value.drop(4).dropLast(1).split(",").map { it.toInt() }
+                    acc.copy(second = acc.second + a * b)
+                } else acc
             }
-        }
-        return sum
-    }
+        }.second
 }
 
 public fun main() = Day.mainify(Day3::class)
