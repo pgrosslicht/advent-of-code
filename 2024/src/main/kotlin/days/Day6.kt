@@ -5,6 +5,7 @@ import com.google.common.collect.HashBasedTable
 import com.google.common.collect.ImmutableTable
 import com.google.common.collect.Table
 import utils.Direction
+import java.util.stream.Collectors
 
 public class Day6 : Day(6) {
     public override fun partOne(): Int {
@@ -34,13 +35,14 @@ public class Day6 : Day(6) {
 
         val start = map.find { it == Entity.GUARD } ?: error("Guard not found")
 
-        return map.cellSet()
-            .filter { it.value == Entity.EMPTY }
-            .count {
+        return walkUntilObstacle(map, mutableSetOf(), start, Direction.LEFT)
+            .parallelStream()
+            .map {
                 val newMap = HashBasedTable.create(map)
-                newMap.put(it.rowKey, it.columnKey, Entity.OBSTACLE)
+                newMap.put(it.first, it.second, Entity.OBSTACLE)
                 walksInLoop(newMap, mutableSetOf(), start, Direction.LEFT)
             }
+            .count().toInt()
     }
 
     tailrec fun walkUntilObstacle(
