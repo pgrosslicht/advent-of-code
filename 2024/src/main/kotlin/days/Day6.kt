@@ -5,34 +5,17 @@ import com.google.common.collect.HashBasedTable
 import com.google.common.collect.ImmutableTable
 import com.google.common.collect.Table
 import utils.Direction
-import java.util.stream.Collectors
 
 public class Day6 : Day(6) {
     public override fun partOne(): Int {
-        val map =
-            ImmutableTable.builder<Int, Int, Entity>()
-                .also { builder ->
-                    dataList.forEachIndexed { x, line ->
-                        line.forEachIndexed { y, ch -> builder.put(x, y, Entity.of(ch)) }
-                    }
-                }
-                .build()
-
+        val map = parseMap()
         val start = map.find { it == Entity.GUARD } ?: error("Guard not found")
 
         return walkUntilObstacle(map, mutableSetOf(), start, Direction.LEFT).size
     }
 
     public override fun partTwo(): Int {
-        val map =
-            ImmutableTable.builder<Int, Int, Entity>()
-                .also { builder ->
-                    dataList.forEachIndexed { x, line ->
-                        line.forEachIndexed { y, ch -> builder.put(x, y, Entity.of(ch)) }
-                    }
-                }
-                .build()
-
+        val map = parseMap()
         val start = map.find { it == Entity.GUARD } ?: error("Guard not found")
 
         return walkUntilObstacle(map, mutableSetOf(), start, Direction.LEFT)
@@ -77,6 +60,14 @@ public class Day6 : Day(6) {
         if (visited.contains(direction to (start + direction))) return true
         return walksInLoop(map, visited, start + direction, direction)
     }
+
+    private fun parseMap(): Table<Int, Int, Entity> =  ImmutableTable.builder<Int, Int, Entity>()
+        .also { builder ->
+            dataList.forEachIndexed { x, line ->
+                line.forEachIndexed { y, ch -> builder.put(x, y, Entity.of(ch)) }
+            }
+        }
+        .build()
 
     enum class Entity {
         EMPTY,
