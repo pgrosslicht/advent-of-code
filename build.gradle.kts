@@ -1,8 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     base
-    kotlin("jvm") version "1.6.0" apply false
+    kotlin("jvm") version "2.0.0" apply false
 }
 
 allprojects {
@@ -14,8 +15,8 @@ allprojects {
     }
 
     tasks.withType(KotlinCompile::class).all {
-        kotlinOptions {
-            jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 }
