@@ -28,7 +28,7 @@ public class Day5 : Day(5) {
         return fixedUpdates.sumOf { it[it.size / 2] }
     }
 
-    private fun fixUpdate(update: List<Int>, mustBeBefore: Map<Int, Set<Int>>): List<Int> {
+    private tailrec fun fixUpdate(update: List<Int>, mustBeBefore: Map<Int, Set<Int>>): List<Int> {
         val fixed = update.toMutableList()
         for (i in update.indices) {
             val page = update[i]
